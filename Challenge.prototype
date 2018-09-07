@@ -1,0 +1,283 @@
+MetaObject Rover : rover {
+	property LFmotor : real
+	property LFbrake : real
+	property RFmotor : real
+	property RFbrake : real
+	property LMmotor : real
+	property LMbrake : real
+	property LBmotor : real
+	property LBbrake : real
+	property RMmotor : real
+	property RMbrake : real
+	property RBmotor : real
+	property RBbrake : real
+
+	property velX: real
+	property velY: real
+	property velZ: real
+	property Compass: real
+
+	property sizeX : real
+	property sizeY : real
+	property sizeZ : real
+
+	property posX : real
+	property posY : real
+	property posZ : real
+	property network: bool
+
+		Action setPos() return (){
+		posX = 1
+		posY = 1
+		posZ = posY
+		Purpose : "Set the position of the rover to 1,1"
+	}
+
+}
+MetaObject Generic : generic{
+	property sizeX : real
+	property sizeY : real
+	property sizeZ : real
+	property posX : real
+	property posY : real
+	property posZ : real
+	property model: string
+	property mesh : string
+	property texture : string
+	property mass : int
+
+}
+
+MetaObject Plane : others {
+	property sizeX : real
+	property sizeY : real
+	property sizeZ : real
+	property posX : real
+	property posY : real
+	property posZ : real
+}
+
+
+Object land : Plane {
+	config {
+		posX = 0.0
+		posY = 0.0
+		posZ = 0.0
+		sizeX = 60.0
+		sizeY = 1.0
+		sizeZ = 60.0
+	}
+
+}
+Object Rover1 : Rover {
+	Action setForwardPower (amount : int) return ()
+	{
+		LFmotor = amount
+		LMmotor = amount
+		LBmotor = amount
+		RFmotor = amount
+		RMmotor = amount
+		RBmotor = amount
+		Purpose : "change the power of all wheels to this value"
+	}
+		Action incrementPower (amount : int) return ()
+	{
+		LFmotor = amount+LFmotor
+		LMmotor = amount+LMmotor
+		LBmotor = amount+LBmotor
+		RFmotor = amount+RFmotor
+		RMmotor = amount+RMmotor
+		RBmotor = amount+RBmotor
+		Purpose : "Increment the power of all wheels by the amount"
+	}
+	Action setLRPower (leftPower : int, rightPower : int) return ()
+	{
+		LFmotor = leftPower
+		LMmotor = leftPower
+		LBmotor = leftPower
+		RFmotor = rightPower
+		RMmotor = rightPower
+		RBmotor = rightPower
+		Purpose : "Set the power of the left and right wheels"
+	}
+	Action brake (amount : int) return (){
+		LFbrake = amount
+		RFbrake = amount
+		LMbrake = amount
+		RMbrake = amount
+		LBbrake = amount
+		RBbrake = amount
+		Purpose : "Apply the amount of brake power to all wheels"
+	}
+	Action setFR (amount:int) return (){
+		RFmotor = amount
+		Purpose : "Set Front Right Motor power"
+	}
+	Action setMR (amount:int) return (){
+		RMmotor = amount
+		Purpose : "Set Middle Right Motor power"
+	}
+	Action setBR (amount:int) return (){
+		RBmotor = amount
+		Purpose : "Set Back Right Motor power"
+	}
+	Action setFL (amount:int) return (){
+		LFmotor = amount
+		Purpose : "Set Front Left Motor power"
+	}
+	Action setML (amount:int) return (){
+		LMmotor = amount
+		Purpose : "Set Middle Left Motor power"
+	}
+	Action setBL (amount:int) return (){
+		LBmotor = amount
+		Purpose : "Set Back Left Motor power"
+	}
+	Action GPS () return (ret : real, ret2:real)
+	{
+		ret = posX
+		ret2 = posZ
+		Purpose : "get the X and Z coordinate"
+	}
+		Action getCompass() return(ret : real){
+		ret = Compass
+		Purpose:  " get the degrees clockwise of North"
+	}
+	config {
+		network = true
+		sizeX = 1.0
+		sizeY = 1.0
+		sizeZ = 1.0
+		posX = 1.0
+		posY = 1.3
+		posZ = 3.30
+	}
+	}
+	Object rock : Generic {
+	Action getX () return (val : real){
+		val = posX
+		Purpose : "Get X value of rock"
+	}
+	Action getZ () return (val : real){
+		val = posZ
+		Purpose : "Get Z value of rock"
+	}
+	config{
+		posX = 1.0
+		posY = 1.0
+		posZ = 20.0
+		sizeX = 1.0
+		sizeY = 1.0
+		sizeZ = 1.0
+		mesh = "Icosphere_001"
+		texture = "Rock6"
+		model = "RockSet"
+		mass = 1000
+	}
+}
+Object Rover2 : Rover {
+	Action setForwardPower (amount : int) return ()
+	{
+		LFmotor = amount
+		LMmotor = amount
+		LBmotor = amount
+		RFmotor = amount
+		RMmotor = amount
+		RBmotor = amount
+		Purpose : "change the power of all wheels to this value"
+	}
+		Action incrementPower (amount : int) return ()
+	{
+		LFmotor = amount+LFmotor
+		LMmotor = amount+LMmotor
+		LBmotor = amount+LBmotor
+		RFmotor = amount+RFmotor
+		RMmotor = amount+RMmotor
+		RBmotor = amount+RBmotor
+		Purpose : "Increment the power of all wheels by the amount"
+	}
+	Action setLRPower (leftPower : int, rightPower : int) return ()
+	{
+		LFmotor = leftPower
+		LMmotor = leftPower
+		LBmotor = leftPower
+		RFmotor = rightPower
+		RMmotor = rightPower
+		RBmotor = rightPower
+		Purpose : "Set the power of the left and right wheels"
+	}
+	Action brake (amount : int) return (){
+		LFbrake = amount
+		RFbrake = amount
+		LMbrake = amount
+		RMbrake = amount
+		LBbrake = amount
+		RBbrake = amount
+		Purpose : "Apply the amount of brake power to all wheels"
+	}
+	Action setFR (amount:int) return (){
+		RFmotor = amount
+		Purpose : "Set Front Right Motor power"
+	}
+	Action setMR (amount:int) return (){
+		RMmotor = amount
+		Purpose : "Set Middle Right Motor power"
+	}
+	Action setBR (amount:int) return (){
+		RBmotor = amount
+		Purpose : "Set Back Right Motor power"
+	}
+	Action setFL (amount:int) return (){
+		LFmotor = amount
+		Purpose : "Set Front Left Motor power"
+	}
+	Action setML (amount:int) return (){
+		LMmotor = amount
+		Purpose : "Set Middle Left Motor power"
+	}
+	Action setBL (amount:int) return (){
+		LBmotor = amount
+		Purpose : "Set Back Left Motor power"
+	}
+	Action GPSy () return (ret : real)
+	{
+		ret = posY
+		Purpose : "get the Y coordinate"
+	}
+	Action GPSx () return (ret : real)
+	{
+		ret = posX
+		Purpose : "get the X coordinate"
+	}
+	Action GPSz () return (ret : real)
+	{
+		ret = posZ
+		Purpose : "get the Z coordinate"
+	}
+		Action getCompass() return(ret : real){
+		ret = Compass
+		Purpose: " get the degrees clockwise of North"
+	}
+	config {
+		network = true
+		sizeX = 1.0
+		sizeY = 1.0
+		sizeZ = 1.0
+		posX = 1.0
+		posY = 1.8
+		posZ = 15.0
+	}
+	}
+
+Env simulation {
+	Instance plane : land
+	Instance Target : Rover2
+	Instance Rover: Rover1
+	Channel control1 direction inout type TCP (port : 8888) assign Rover
+	Channel control2 direction inout type TCP (port : 8887) assign Target
+	Channel control3 direction inout type TCP (port : 8886) assign Rover Target
+
+	Focus : Rover
+	Author: "Michal"
+	Purpose: "MASE Challenge Problem"
+}
